@@ -4,10 +4,10 @@ from tkinter import  *
 import mysql.connector as sqlcon
 import random as rd
 
-con=sqlcon.connect(host="localhost",user="root",password="1234")#connection to mysql 
+con=sqlcon.connect(host="sql6.freemysqlhosting.net",user="sql6460733",password="XvxjdKT12u")#connection to mysql 
 cur=con.cursor()
 cur = con.cursor(buffered=True)
-cur.execute("create database if not exists hopital")
+cur.execute("create database if not exists sql6460733")
 cur.execute("use hopital")
 cur.execute("create table if not exists appointment"
             "("
