@@ -4,11 +4,16 @@ from tkinter import  *
 import mysql.connector as sqlcon
 import random as rd
 
-con=sqlcon.connect(host="sql6.freemysqlhosting.net",user="sql6460733",password="XvxjdKT12u")#connection to mysql 
+con=sqlcon.connect(host="127.0.0.1",user="root",password="Pulkit03@")#connection to mysql 
 cur=con.cursor()
 cur = con.cursor(buffered=True)
-cur.execute("create database if not exists sql6460733")
-cur.execute("use hopital")
+if (con):
+    # Carry out normal procedure
+    print ("Connection successful")
+else:
+    print ("Connection unsuccessful")
+cur.execute("create database if not exists Hospital")
+cur.execute("use Hospital")
 cur.execute("create table if not exists appointment"
             "("
             "idno varchar(12) primary key,"
@@ -34,6 +39,11 @@ def entry():
     p4=e4.get()
     p5=e5.get()
     p6=e6.get()
+
+    query='insert into appointment values("{}", "{}", "{}", "{}", "{}", "{}")'.format(p1,p2,p3,p4,p5,p6)
+    con.commit()
+    cur.execute(query)
+    
         
     
     tkinter.messagebox.showinfo("DONE", "YOU HAVE BEEN REGISTERED")
@@ -72,6 +82,7 @@ def register():
     e6.place(x=100,y=330)
     b1=Button(root1,text="SUBMIT",command=entry)
     b1.place(x=150,y=370)
+    
     
     root.resizable(False,False)
     root1.mainloop()
@@ -464,9 +475,10 @@ def search_data():
 def view_data():
     global p1
     p1=x3.get()
-    cur.execute('select * from appointment_details where idno=(%s)',(p1,))
+    cur.execute('select * from appointment where idno=(%s)',(p1,))
     
     dat=cur.fetchall()
+    print(dat)
     a=[]
     for i in dat:
         a.append(i)   
