@@ -1,1 +1,1 @@
-web: gunicorn hospital.py:app --log-file -
+web: gunicorn hospital:app --log-file -
