@@ -1,1 +1,1 @@
-worker: python hospital.py
+web: gunicorn hospital.py:app --log-file -
